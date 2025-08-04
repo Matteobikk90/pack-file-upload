@@ -1,0 +1,25 @@
+{
+  "name": "pack-file-upload",
+  "version": "1.0.0",
+  "description": "A simple file upload feature with a table to display uploaded files.",
+  "main": "index.js",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build"
+  },
+  "keywords": [
+    
+  ],
+  "author": "Matteo Soresini",
+  "license": "ISC",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
