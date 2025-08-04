@@ -4,7 +4,7 @@ node_modules/
 .pnpm-store/
 
 # Environment files
-.env.*
+.env
 
 # OS
 .DS_Store
@@ -21,3 +21,6 @@ packages/db/prisma/*.sqlite
 
 # Logs
 *.log
+
+# Prisma Generated
+src/generated
