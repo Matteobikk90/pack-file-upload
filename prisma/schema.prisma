@@ -15,13 +15,45 @@ datasource db {
 }
 
 model File {
-  id          String   @id @default(uuid())
-  title       String   @db.VarChar(200)
-  description String   @db.VarChar(1000)
+  id          String    @id @default(uuid())
+  title       String    @db.VarChar(200)
+  description String    @db.VarChar(1000)
   category    String
   language    String
   provider    String
   roles       String[]
   filePath    String
-  createdAt   DateTime @default(now())
+  createdAt   DateTime  @default(now())
+  Category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  String?
+  Language    Language? @relation(fields: [languageId], references: [id])
+  languageId  String?
+  Provider    Provider? @relation(fields: [providerId], references: [id])
+  providerId  String?
+  Role        Role?     @relation(fields: [roleId], references: [id])
+  roleId      String?
+}
+
+model Category {
+  id    String @id @default(uuid())
+  name  String @unique
+  files File[]
+}
+
+model Language {
+  id    String @id @default(uuid())
+  name  String @unique
+  files File[]
+}
+
+model Provider {
+  id    String @id @default(uuid())
+  name  String @unique
+  files File[]
+}
+
+model Role {
+  id    String @id @default(uuid())
+  name  String @unique
+  files File[]
 }
