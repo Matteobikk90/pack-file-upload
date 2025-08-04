@@ -21,3 +21,6 @@ packages/db/prisma/*.sqlite
 
 # Logs
 *.log
+
+# Prisma Generated
+src/generated
