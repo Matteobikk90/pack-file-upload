@@ -17,6 +17,9 @@ importers:
       dotenv:
         specifier: ^17.2.1
         version: 17.2.1
+      svelte-french-toast:
+        specifier: ^1.2.0
+        version: 1.2.0(svelte@5.37.3)
       svelte-select:
         specifier: ^5.8.3
         version: 5.8.3
@@ -1692,8 +1695,18 @@ packages:
   svelte-floating-ui@1.5.8:
     resolution: {integrity: sha512-dVvJhZ2bT+kQDHlE4Lep8t+sgEc0XD96fXLzAi2DDI2bsaegBbClxXVNMma0C2WsG+n9GJSYx292dTvA8CYRtw==}
 
+  svelte-french-toast@1.2.0:
+    resolution: {integrity: sha512-5PW+6RFX3xQPbR44CngYAP1Sd9oCq9P2FOox4FZffzJuZI2mHOB7q5gJBVnOiLF5y3moVGZ7u2bYt7+yPAgcEQ==}
+    peerDependencies:
+      svelte: ^3.57.0 || ^4.0.0
+
   svelte-select@5.8.3:
     resolution: {integrity: sha512-nQsvflWmTCOZjssdrNptzfD1Ok45hHVMTL5IHay5DINk7dfu5Er+8KsVJnZMJdSircqtR0YlT4YkCFlxOUhVPA==}
+
+  svelte-writable-derived@3.1.1:
+    resolution: {integrity: sha512-w4LR6/bYZEuCs7SGr+M54oipk/UQKtiMadyOhW0PTwAtJ/Ai12QS77sLngEcfBx2q4H8ZBQucc9ktSA5sUGZWw==}
+    peerDependencies:
+      svelte: ^3.2.1 || ^4.0.0-next.1 || ^5.0.0-next.94
 
   svelte@5.37.3:
     resolution: {integrity: sha512-7t/ejshehHd+95z3Z7ebS7wsqHDQxi/8nBTuTRwpMgNegfRBfuitCSKTUDKIBOExqfT2+DhQ2VLG8Xn+cBXoaQ==}
@@ -3307,9 +3320,18 @@ snapshots:
       '@floating-ui/core': 1.7.3
       '@floating-ui/dom': 1.7.3
 
+  svelte-french-toast@1.2.0(svelte@5.37.3):
+    dependencies:
+      svelte: 5.37.3
+      svelte-writable-derived: 3.1.1(svelte@5.37.3)
+
   svelte-select@5.8.3:
     dependencies:
       svelte-floating-ui: 1.5.8
+
+  svelte-writable-derived@3.1.1(svelte@5.37.3):
+    dependencies:
+      svelte: 5.37.3
 
   svelte@5.37.3:
     dependencies:
