@@ -1,8 +1,8 @@
-import type { SelectOption, UIFormValues } from '$lib/types/options';
+import type { SelectOption, UIFormValuesType } from '$lib/types/options';
 
 export const EMPTY_OPTIONS: SelectOption[] = [];
 
-export const DEFAULT_FORM: UIFormValues = {
+export const DEFAULT_FORM: UIFormValuesType = {
 	title: '',
 	description: '',
 	category: null,
