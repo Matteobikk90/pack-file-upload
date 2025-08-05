@@ -1,0 +1,33 @@
+# Node modules and dependencies
+node_modules
+.pnpm
+.pnpm-store
+npm-debug.log
+pnpm-debug.log
+
+# SvelteKit build and cache
+.svelte-kit
+build
+dist
+
+# Vercel and deployment stuff
+.vercel
+
+# Prisma local DBs
+prisma/dev.db
+prisma/*.sqlite
+
+# Local env files (if you don't want to ship them)
+.env
+.env.*
+
+# Mac/Windows OS files
+.DS_Store
+Thumbs.db
+
+# Static uploads (if you want to mount as a volume instead)
+static/uploads
+
+# VSCode and editor stuff
+.vscode
+.idea
