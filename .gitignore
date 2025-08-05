@@ -26,7 +26,6 @@ packages/db/prisma/*.sqlite
 src/generated
 
 # Output
-.svelte-kit/
 .vercel/output/
 dist/
 build/
