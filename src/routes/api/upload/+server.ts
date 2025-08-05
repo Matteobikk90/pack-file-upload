@@ -35,10 +35,6 @@ export const POST: RequestHandler = async ({ request }) => {
 		})
 	);
 
-	// store locally
-	// const filePath = `static/uploads/${newFileName}`;
-
-	// store in s3
 	const filePath = `https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/${newFileName}`;
 
 	await prisma.file.create({
