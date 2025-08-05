@@ -2,7 +2,8 @@ import { DEFAULT_FORM } from '$lib/constants/form';
 import type { ApiOptionsResponse, SelectOption, UIFormValues } from '$lib/types/options';
 import { toSelect } from '$lib/utils/formatter';
 import { FormSchema } from '$lib/validation/file-upload.schema';
-import { writable } from 'svelte/store';
+import toast from 'svelte-french-toast';
+import { get, writable } from 'svelte/store';
 
 export function useFileUpload() {
 	const categories = writable<SelectOption[]>([]);
@@ -44,6 +45,48 @@ export function useFileUpload() {
 		errors.set(newErrors);
 	}
 
+	function handleFileChange(event: Event) {
+		const input = event.currentTarget as HTMLInputElement;
+		form.update((f) => {
+			f.file = input.files?.[0] ?? null;
+			return f;
+		});
+		fileName.set(input.files?.[0]?.name ?? 'No file selected*');
+	}
+
+	async function handleSubmit(e: Event) {
+		e.preventDefault();
+		const $form = get(form);
+		const formData = new FormData();
+		formData.set('title', $form.title);
+		formData.set('description', $form.description);
+		formData.set('category', $form.category?.value ?? '');
+		formData.set('language', $form.language?.value ?? '');
+		formData.set('provider', $form.provider?.value ?? '');
+		($form.roles || []).forEach((role) => {
+			formData.append('roles', role.value);
+		});
+		if ($form.file) formData.set('file', $form.file);
+
+		try {
+			const res = await fetch('/api/upload', {
+				method: 'POST',
+				body: formData
+			});
+			const data = await res.json();
+
+			if (data.success) {
+				toast.success('Resource uploaded successfully!');
+				form.set({ ...DEFAULT_FORM });
+				fileName.set('No file selected*');
+			} else {
+				toast.error(data.message || 'Upload failed.');
+			}
+		} catch {
+			toast.error('Something went wrong. Please try again.');
+		}
+	}
+
 	return {
 		categories,
 		languages,
@@ -54,6 +97,8 @@ export function useFileUpload() {
 		fileName,
 		isFormValid,
 		fetchOptions,
-		validateForm
+		validateForm,
+		handleFileChange,
+		handleSubmit
 	};
 }
