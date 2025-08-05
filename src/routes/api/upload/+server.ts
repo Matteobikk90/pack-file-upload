@@ -13,7 +13,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const file = data.get('file') as File;
 
 	if (!title || !description || !category || !language || !provider || !roles.length || !file) {
-		return new Response('Missing required fields', { status: 400 });
+		return json({ success: false, message: 'Missing required fields' }, { status: 400 });
 	}
 
 	await prisma.file.create({

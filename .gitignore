@@ -24,3 +24,10 @@ packages/db/prisma/*.sqlite
 
 # Prisma Generated
 src/generated
+
+# Output
+.svelte-kit/
+.vercel/output/
+dist/
+build/
+coverage/
