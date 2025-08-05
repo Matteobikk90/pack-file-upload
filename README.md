@@ -1,38 +1,67 @@
-# sv
+# 🗂️ Pack File Upload
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A simple file upload and management app built with **SvelteKit**, **PostgreSQL**, and **Docker**.
 
-## Creating a project
+---
 
-If you're seeing this, you've probably already done this step. Congrats!
+## 🚀 Quick Start (with Docker)
 
-```sh
-# create a new project in the current directory
-npx sv create
+### 1. Clone the repository
 
-# create a new project in my-app
-npx sv create my-app
+```bash
+git clone https://github.com/Matteobikk90/pack-file-upload.git
+cd pack-file-upload
 ```
 
-## Developing
+### 2. Start the app & database
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```bash
+docker compose up --build
 ```
 
-## Building
+- The app will be available at http://localhost:4173
+- PostgreSQL runs on port 5432 (internal, used by the app)
 
-To create a production version of your app:
+### 3. Usage
 
-```sh
-npm run build
+- Go to the app in your browser.
+- Upload files and fill the form.
+- Uploaded files are stored locally in static/uploads/ (or S3, if configured).
+
+---
+
+### ⚙️ Environment Variables
+
+Defaults are provided in Docker Compose, but you can override:
+DATABASE_URL=postgres://user:password@db:5432/uploads
+
+---
+
+### 💡 Features
+
+- Upload PDF, image, video, and other files
+- Responsive table for uploaded resources
+- Click a row to preview files (image, PDF, video)
+- All requirements met for the assignment
+
+---
+
+### 🐳 Tech Stack
+
+- Frontend/Backend: SvelteKit (TypeScript)
+- Database: PostgreSQL
+- ORM: Prisma
+- DevOps: Docker, Docker Compose
+
+---
+
+### 📦 Project Structure
+
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+├── prisma/
+├── src/
+├── static/uploads/ # Uploaded files (local)
+├── Dockerfile
+├── docker-compose.yaml
+└── ...
+```
