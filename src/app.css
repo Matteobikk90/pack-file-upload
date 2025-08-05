@@ -1,3 +1,7 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+.form-input {
+	@apply input input-bordered w-full rounded-md border-gray-300 transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100;
+}
