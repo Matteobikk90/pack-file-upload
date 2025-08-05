@@ -1,14 +1,14 @@
 export type SelectOption = { value: string; label: string };
 export type ApiOption = { id: string; name: string };
 
-export interface ApiOptionsResponse {
+export interface ApiOptionsResponseType {
 	categories: ApiOption[];
 	languages: ApiOption[];
 	providers: ApiOption[];
 	roles: ApiOption[];
 }
 
-export type UIFormValues = {
+export type UIFormValuesType = {
 	title: string;
 	description: string;
 	category: SelectOption | null;

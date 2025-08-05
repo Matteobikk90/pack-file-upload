@@ -23,6 +23,9 @@ importers:
       svelte-select:
         specifier: ^5.8.3
         version: 5.8.3
+      svelte-table:
+        specifier: ^0.6.5
+        version: 0.6.5
       zod:
         specifier: ^4.0.14
         version: 4.0.14
@@ -1703,6 +1706,9 @@ packages:
   svelte-select@5.8.3:
     resolution: {integrity: sha512-nQsvflWmTCOZjssdrNptzfD1Ok45hHVMTL5IHay5DINk7dfu5Er+8KsVJnZMJdSircqtR0YlT4YkCFlxOUhVPA==}
 
+  svelte-table@0.6.5:
+    resolution: {integrity: sha512-BSqO7iiSAaaGTTE5BILeqhUgH4Hk/l/0f22wk+E64h6bPCcppopcJrC759QVTGPn25ayq8Q3Vaxny3hLMX+51Q==}
+
   svelte-writable-derived@3.1.1:
     resolution: {integrity: sha512-w4LR6/bYZEuCs7SGr+M54oipk/UQKtiMadyOhW0PTwAtJ/Ai12QS77sLngEcfBx2q4H8ZBQucc9ktSA5sUGZWw==}
     peerDependencies:
@@ -3328,6 +3334,8 @@ snapshots:
   svelte-select@5.8.3:
     dependencies:
       svelte-floating-ui: 1.5.8
+
+  svelte-table@0.6.5: {}
 
   svelte-writable-derived@3.1.1(svelte@5.37.3):
     dependencies:

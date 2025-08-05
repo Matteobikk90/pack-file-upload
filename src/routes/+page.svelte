@@ -1,5 +1,6 @@
 <script lang="ts">
-	import UploadForm from '$lib/components/UploadForm.svelte';
+	import ResourcesTable from '$lib/components/ResourcesTable.svelte';
 </script>
 
-<UploadForm />
+<h1 class="mb-6 text-2xl font-bold">Resources</h1>
+<ResourcesTable />

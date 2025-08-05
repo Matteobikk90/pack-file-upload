@@ -49,6 +49,7 @@
 		"dotenv": "^17.2.1",
 		"svelte-french-toast": "^1.2.0",
 		"svelte-select": "^5.8.3",
+		"svelte-table": "^0.6.5",
 		"zod": "^4.0.14"
 	}
 }

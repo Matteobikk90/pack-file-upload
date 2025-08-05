@@ -1,5 +1,5 @@
 import { DEFAULT_FORM } from '$lib/constants/form';
-import type { ApiOptionsResponse, SelectOption, UIFormValues } from '$lib/types/options';
+import type { ApiOptionsResponseType, SelectOption, UIFormValuesType } from '$lib/types/options';
 import { toSelect } from '$lib/utils/formatter';
 import { FormSchema } from '$lib/validation/file-upload.schema';
 import toast from 'svelte-french-toast';
@@ -10,21 +10,21 @@ export function useFileUpload() {
 	const languages = writable<SelectOption[]>([]);
 	const providers = writable<SelectOption[]>([]);
 	const roles = writable<SelectOption[]>([]);
-	const form = writable<UIFormValues>({ ...DEFAULT_FORM });
+	const form = writable<UIFormValuesType>({ ...DEFAULT_FORM });
 	const errors = writable<Record<string, string>>({});
 	const fileName = writable('No file selected*');
 	const isFormValid = writable(false);
 
 	async function fetchOptions() {
 		const res = await fetch('/api/options');
-		const data: ApiOptionsResponse = await res.json();
+		const data: ApiOptionsResponseType = await res.json();
 		categories.set(data.categories.map(toSelect));
 		languages.set(data.languages.map(toSelect));
 		providers.set(data.providers.map(toSelect));
 		roles.set(data.roles.map(toSelect));
 	}
 
-	function validateForm($form: UIFormValues) {
+	function validateForm($form: UIFormValuesType) {
 		const toValidate = {
 			...$form,
 			category: $form.category?.value ?? '',
