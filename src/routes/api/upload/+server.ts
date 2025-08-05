@@ -1,5 +1,8 @@
 import { prisma } from '$lib/server/prisma';
 import { json, type RequestHandler } from '@sveltejs/kit';
+import { writeFile } from 'fs/promises';
+import path from 'path';
+import { v4 as uuidv4 } from 'uuid';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const data = await request.formData();
@@ -16,6 +19,13 @@ export const POST: RequestHandler = async ({ request }) => {
 		return json({ success: false, message: 'Missing required fields' }, { status: 400 });
 	}
 
+	const buffer = Buffer.from(await file.arrayBuffer());
+	const ext = path.extname(file.name);
+	const newFileName = `${uuidv4()}${ext}`;
+	const filePath = `static/uploads/${newFileName}`;
+
+	await writeFile(filePath, buffer);
+
 	await prisma.file.create({
 		data: {
 			title,
@@ -24,7 +34,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			language,
 			provider,
 			roles,
-			filePath: file.name
+			filePath: newFileName
 		}
 	});
 

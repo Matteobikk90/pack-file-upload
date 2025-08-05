@@ -6,4 +6,5 @@ export type ResourceType = {
 	provider: string;
 	roles: string[];
 	filePath: string;
+	actions: string;
 };

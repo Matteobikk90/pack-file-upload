@@ -27,6 +27,7 @@
 		"@tailwindcss/typography": "^0.5.15",
 		"@tailwindcss/vite": "^4.0.0",
 		"@types/node": "^24.2.0",
+		"@types/uuid": "^10.0.0",
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-svelte": "^3.0.0",
@@ -50,6 +51,7 @@
 		"svelte-french-toast": "^1.2.0",
 		"svelte-select": "^5.8.3",
 		"svelte-table": "^0.6.5",
+		"uuid": "^11.1.0",
 		"zod": "^4.0.14"
 	}
 }

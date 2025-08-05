@@ -1,4 +1,3 @@
-import type { ResourceType } from '$lib/types/resources';
 import { writable } from 'svelte/store';
 
 export function useResources() {
@@ -19,10 +18,5 @@ export function useResources() {
 		}
 	}
 
-	function handleRowClick(event: CustomEvent<{ row: ResourceType }>) {
-		const rowData = event.detail.row;
-		console.log(rowData);
-	}
-
-	return { resources, loading, error, fetchResources, handleRowClick };
+	return { resources, loading, error, fetchResources };
 }

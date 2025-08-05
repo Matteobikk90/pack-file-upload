@@ -31,3 +31,6 @@ src/generated
 dist/
 build/
 coverage/
+
+# Uploads
+static/uploads

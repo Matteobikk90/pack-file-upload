@@ -1,15 +1,10 @@
-import type { ResourceType } from '$lib/types/resources';
+import { formatColumn } from '$lib/utils/formatter';
 
 export const columns = [
-	{ key: 'title', title: 'Title' },
-	{ key: 'description', title: 'Description' },
-	{ key: 'category', title: 'Category' },
-	{ key: 'language', title: 'Language' },
-	{ key: 'provider', title: 'Provider' },
-	{
-		key: 'roles',
-		title: 'Roles',
-		cell: (row: ResourceType) => row.roles?.join(', ')
-	},
-	{ key: 'filePath', title: 'File' }
+	formatColumn('title', 'Content Title'),
+	formatColumn('description', 'Description'),
+	formatColumn('category', 'Path'),
+	formatColumn('provider', 'Provider'),
+	formatColumn('language', 'Type'),
+	formatColumn('actions', '')
 ];
