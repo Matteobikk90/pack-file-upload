@@ -5,6 +5,15 @@
 	export let maxlength: number | undefined = undefined;
 	export let required: boolean = false;
 	export let value: string = '';
+	export let className = '';
 </script>
 
-<input class="form-input" {name} {type} {placeholder} {maxlength} {required} bind:value />
+<input
+	class={`form-input ${className}`}
+	{name}
+	{type}
+	{placeholder}
+	{maxlength}
+	{required}
+	bind:value
+/>

@@ -1,14 +1,13 @@
-import type { OptionItem } from '$lib/types/options';
-import type { FormValues } from '$lib/validation/file-upload.schema';
+import type { SelectOption, UIFormValues } from '$lib/types/options';
 
-export const EMPTY_OPTIONS: OptionItem[] = [];
+export const EMPTY_OPTIONS: SelectOption[] = [];
 
-export const DEFAULT_FORM: FormValues = {
+export const DEFAULT_FORM: UIFormValues = {
 	title: '',
 	description: '',
-	category: '',
-	language: '',
-	provider: '',
+	category: null,
+	language: null,
+	provider: null,
 	roles: [],
 	file: null
 };

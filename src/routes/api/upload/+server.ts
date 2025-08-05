@@ -3,6 +3,7 @@ import { json, type RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const data = await request.formData();
+	console.log({ data });
 
 	const title = data.get('title') as string;
 	const description = data.get('description') as string;

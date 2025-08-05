@@ -1,24 +1,33 @@
 <script lang="ts">
 	import Input from '$lib/components/Input.svelte';
-	import Select from '$lib/components/Select.svelte';
 	import { DEFAULT_FORM, EMPTY_OPTIONS } from '$lib/constants/form';
-	import type { OptionItem } from '$lib/types/options';
+	import type { ApiOptionsResponse, SelectOption, UIFormValues } from '$lib/types/options';
+	import { toSelect } from '$lib/utils/formatter';
 	import { FormSchema, type FormValues } from '$lib/validation/file-upload.schema';
 	import { onMount } from 'svelte';
+	import SvelteSelect from 'svelte-select';
 
-	let categories: OptionItem[] = [...EMPTY_OPTIONS];
-	let languages: OptionItem[] = [...EMPTY_OPTIONS];
-	let providers: OptionItem[] = [...EMPTY_OPTIONS];
-	let roles: OptionItem[] = [...EMPTY_OPTIONS];
+	let categories: SelectOption[] = [...EMPTY_OPTIONS];
+	let languages: SelectOption[] = [...EMPTY_OPTIONS];
+	let providers: SelectOption[] = [...EMPTY_OPTIONS];
+	let roles: SelectOption[] = [...EMPTY_OPTIONS];
 
-	let form: FormValues = { ...DEFAULT_FORM };
+	let form: UIFormValues = { ...DEFAULT_FORM };
 	let file: File | null = null;
 	let fileName = 'No file selected*';
 	let errors: Record<string, string> = {};
 	let isFormValid = false;
 
 	$: {
-		const toValidate = { ...form, file };
+		const toValidate = {
+			...form,
+			category: form.category?.value ?? '',
+			language: form.language?.value ?? '',
+			provider: form.provider?.value ?? '',
+			roles: Array.isArray(form.roles) ? form.roles.map((r) => r.value) : [],
+			file: form.file
+		};
+
 		const result = FormSchema.safeParse(toValidate);
 		isFormValid = result.success;
 
@@ -35,17 +44,18 @@
 
 	onMount(async () => {
 		const res = await fetch('/api/options');
-		const data = await res.json();
-		categories = data.categories;
-		languages = data.languages;
-		providers = data.providers;
-		roles = data.roles;
+		const data: ApiOptionsResponse = await res.json();
+
+		categories = data.categories.map(toSelect);
+		languages = data.languages.map(toSelect);
+		providers = data.providers.map(toSelect);
+		roles = data.roles.map(toSelect);
 	});
 
 	function handleFileChange(event: Event) {
-		const target = event.target as HTMLInputElement;
-		file = target.files?.[0] ?? null;
-		fileName = file?.name ?? 'No file selected*';
+		const input = event.currentTarget as HTMLInputElement;
+		form.file = input.files?.[0] ?? null;
+		fileName = form.file?.name ?? 'No file selected*';
 	}
 </script>
 
@@ -78,35 +88,37 @@
 		{/if}
 	</div>
 
-	<Select
-		name="category"
-		options={categories}
-		required
-		placeholder="Category*"
-		bind:value={form.category}
-	/>
-	<Select
-		name="language"
-		options={languages}
-		required
-		placeholder="Language*"
+	<SvelteSelect bind:value={form.category} items={categories} placeholder="Category*" required />
+	<Input type="hidden" name="category" value={form.category?.value || ''} />
+
+	<SvelteSelect
 		bind:value={form.language}
-	/>
-	<Select
-		name="provider"
-		options={providers}
+		name="language"
+		items={languages}
+		placeholder="Language*"
 		required
-		placeholder="Provider*"
+	/>
+	<Input type="hidden" name="language" value={form.language?.value || ''} />
+
+	<SvelteSelect
 		bind:value={form.provider}
-	/>
-	<Select
-		name="roles"
-		options={roles}
+		name="provider"
+		items={providers}
+		placeholder="Provider*"
 		required
-		placeholder="Role*"
-		bind:value={form.roles}
-		multiple={true}
 	/>
+	<Input type="hidden" name="provider" value={form.provider?.value || ''} />
+
+	<SvelteSelect
+		bind:value={form.roles}
+		items={roles}
+		placeholder="Roles*"
+		multiple={true}
+		required
+	/>
+	{#each form.roles as role (role.value)}
+		<Input type="hidden" name="roles" value={role.value} />
+	{/each}
 
 	<div class="flex items-center gap-3">
 		<input
