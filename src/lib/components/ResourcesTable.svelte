@@ -9,7 +9,7 @@
 
 	function openPreview(row: ResourceType) {
 		if (!row.filePath) return;
-		previewFile = `/uploads/${row.filePath}`;
+		previewFile = row.filePath;
 	}
 </script>
 
