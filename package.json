@@ -15,7 +15,8 @@
 		"db:r": "prisma migrate reset --force",
 		"db:g": "prisma generate",
 		"db:p": "prisma db push",
-		"db:s": "tsx prisma/seed.ts"
+		"db:s": "tsx prisma/seed.ts",
+		"postinstall": "prisma generate"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
