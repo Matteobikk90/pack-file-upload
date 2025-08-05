@@ -41,24 +41,17 @@
 </script>
 
 <form
-	class="relative m-auto flex w-full max-w-2xl flex-col gap-4 rounded-xl bg-white p-8 shadow-lg"
+	class="relative m-auto flex w-full max-w-2xl flex-col gap-4 rounded-md bg-white p-8 shadow-lg"
 	autocomplete="off"
 	onsubmit={submitAndHandle}
 >
 	<h2 class="mb-1 text-xl font-semibold">Upload Resource</h2>
-	<button
-		type="button"
-		class="absolute top-4 right-4 cursor-pointer text-2xl text-gray-400 hover:text-gray-700"
-		onclick={onClose}
-		aria-label="Close"
-	>
-		✕
-	</button>
+	<button type="button" class="close-btn" onclick={onClose} aria-label="Close">✕</button>
 
 	<div class="flex flex-col gap-1">
 		<Input name="title" placeholder="Title*" maxlength={200} required bind:value={$form.title} />
 		{#if $errors.title}
-			<div class="text-sm text-red-600">{$errors.title}</div>
+			<div class="text-error">{$errors.title}</div>
 		{/if}
 	</div>
 
@@ -71,14 +64,39 @@
 			bind:value={$form.description}
 		/>
 		{#if $errors.description}
-			<div class="text-sm text-red-600">{$errors.description}</div>
+			<div class="text-error">{$errors.description}</div>
 		{/if}
 	</div>
 
-	<SvelteSelect bind:value={$form.category} items={$categories} placeholder="Category*" required />
-	<SvelteSelect bind:value={$form.language} items={$languages} placeholder="Language*" required />
-	<SvelteSelect bind:value={$form.provider} items={$providers} placeholder="Provider*" required />
-	<SvelteSelect bind:value={$form.roles} items={$roles} placeholder="Roles*" multiple required />
+	<SvelteSelect
+		class="!form-input !rounded-md"
+		bind:value={$form.category}
+		items={$categories}
+		placeholder="Category*"
+		required
+	/>
+	<SvelteSelect
+		class="!form-input !rounded-md"
+		bind:value={$form.language}
+		items={$languages}
+		placeholder="Language*"
+		required
+	/>
+	<SvelteSelect
+		class="!form-input !rounded-md"
+		bind:value={$form.provider}
+		items={$providers}
+		placeholder="Provider*"
+		required
+	/>
+	<SvelteSelect
+		class="form-input !rounded-md"
+		bind:value={$form.roles}
+		items={$roles}
+		placeholder="Roles*"
+		multiple
+		required
+	/>
 
 	<div class="flex items-center gap-3">
 		<input
@@ -98,11 +116,5 @@
 		<span class="text-gray-500">{$fileName}</span>
 	</div>
 
-	<button
-		type="submit"
-		class="mt-2 ml-auto cursor-pointer rounded-md bg-orange-500 px-4 py-2 font-semibold text-white shadow transition hover:bg-orange-600 disabled:opacity-60"
-		disabled={!$isFormValid}
-	>
-		Upload
-	</button>
+	<button type="submit" class="upload-btn ml-auto" disabled={!$isFormValid}>Upload</button>
 </form>

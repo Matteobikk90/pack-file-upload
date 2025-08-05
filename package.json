@@ -16,7 +16,7 @@
 		"db:g": "prisma generate",
 		"db:p": "prisma db push",
 		"db:s": "tsx prisma/seed.ts",
-		"postinstall": "prisma generate"
+		"postinstall": "prisma generate && pnpm db:seed"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
