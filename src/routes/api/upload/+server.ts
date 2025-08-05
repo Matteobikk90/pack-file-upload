@@ -1,6 +1,9 @@
+import { S3_BUCKET, S3_REGION } from '$env/static/private';
 import { prisma } from '$lib/server/prisma';
+import { s3 } from '$lib/server/s3';
+import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { json, type RequestHandler } from '@sveltejs/kit';
-import { writeFile } from 'fs/promises';
+
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -22,9 +25,21 @@ export const POST: RequestHandler = async ({ request }) => {
 	const buffer = Buffer.from(await file.arrayBuffer());
 	const ext = path.extname(file.name);
 	const newFileName = `${uuidv4()}${ext}`;
-	const filePath = `static/uploads/${newFileName}`;
 
-	await writeFile(filePath, buffer);
+	await s3.send(
+		new PutObjectCommand({
+			Bucket: S3_BUCKET,
+			Key: newFileName,
+			Body: buffer,
+			ContentType: file.type
+		})
+	);
+
+	// store locally
+	// const filePath = `static/uploads/${newFileName}`;
+
+	// store in s3
+	const filePath = `https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/${newFileName}`;
 
 	await prisma.file.create({
 		data: {
@@ -34,7 +49,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			language,
 			provider,
 			roles,
-			filePath: newFileName
+			filePath
 		}
 	});
 
