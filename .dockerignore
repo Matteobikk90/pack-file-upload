@@ -17,10 +17,6 @@ dist
 prisma/dev.db
 prisma/*.sqlite
 
-# Local env files (if you don't want to ship them)
-.env
-.env.*
-
 # Mac/Windows OS files
 .DS_Store
 Thumbs.db
