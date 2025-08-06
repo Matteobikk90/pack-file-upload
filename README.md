@@ -15,6 +15,8 @@ cd pack-file-upload
 
 ### 2. Start the app & database
 
+Set env example listed below with your own secrets
+
 ```bash
 docker compose up --build
 ```
@@ -32,8 +34,13 @@ docker compose up --build
 
 ### ⚙️ Environment Variables
 
-Defaults are provided in Docker Compose, but you can override:
+```
 DATABASE_URL=postgres://user:password@db:5432/uploads
+S3_REGION=your-region
+S3_BUCKET=your-bucket
+S3_ACCESS_KEY_ID=your-access-key
+S3_SECRET_ACCESS_KEY=your-secret
+```
 
 ---
 
@@ -52,6 +59,34 @@ DATABASE_URL=postgres://user:password@db:5432/uploads
 - Database: PostgreSQL
 - ORM: Prisma
 - DevOps: Docker, Docker Compose
+
+---
+
+🌐 Cloud Deployment (Vercel/S3/Neon)
+
+- Deployed on Vercel for demo:
+  https://pack-file-upload-gray.vercel.app/
+- Uses AWS S3 for file storage (configure via .env)
+- Uses Neon for Postgres database (cloud connection string in .env)
+
+---
+
+🛠️ Development
+
+- pnpm dev — Start in dev mode (local only)
+- pnpm db:s — Seed the database
+
+---
+
+❓ FAQ
+
+- Why is my local DB empty after running Docker?
+  You must seed it:
+  docker compose exec app pnpm db:s
+- How do I use my own S3/Neon credentials?
+  Edit .env with your own cloud details.
+- How do I reset/reseed the DB?
+  Stop Docker, remove the volume, restart, and reseed.
 
 ---
 
